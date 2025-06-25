@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail JS</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+
+        (function(){
+            emailjs.init(
+            {
+            publicKey: "toRUwmAXbuDmY4bJR",
+            });
+        })();
+
+    </script> -->
+
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "xjTqe5jN7G6qnYJih",
+        });
+    })();
+    </script>
+
+
+    
+
+
+
+</head>
+<body>
+    
+    <div class="container">
+        <!-- <div class="sub-container"> -->
+            <form action="POST" id="myForm">
+                <input type="text" name="name" id="" placeholder="Name" class="form-control"> 
+                <div class="one">
+                    <input type="email" name="mail" class="form-control" placeholder="Email"><br id="brake1">
+                    <a id="generate-otp" onclick="get_otp()">Get OTP</a>
+                    <br>
+                    <input type="hidden" id="setotp" name="otp">
+                    <input type="text" id="gotp" class="form-control" placeholder="Enter OTP">
+                    <!-- <a id="valid-otp" onclick="verify()">Verify</a> -->
+                </div>
+            </form>
+            <button onclick="check()">Submit</button>
+        <!-- </div> -->
+    </div>
+
+</body>
+
+<script>
+    function check()
+    {
+        var t = document.getElementById("setotp").value;
+        var t1 = document.getElementById("gotp").value;
+
+        if(t == t1){
+            alert("Successfully Login")
+            window.location.href="./FAQ's  PAGE/index.html";
+
+        }else{
+            alert("Failed!!!")
+        }
+    }
+
+    var y = 1;
+    function get_otp() 
+    {
+        var otpGen = Math.floor(1000 + Math.random() * 9000);
+        document.getElementById("setotp").value = otpGen;
+        console.log(document.getElementById("setotp").value);
+
+        emailjs.sendForm('service_a0p3i9e', 'template_9hqpvxa', '#myForm').then(
+        (response) => {
+            console.log('SUCCESS!', response.status, response.text);
+        },
+        (error) => {
+            console.log('FAILED...', error);
+        },
+    );
+
+    };
+    
+
+
+</script>
+
+
+</html>
